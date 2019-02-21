@@ -42,4 +42,9 @@
                     bins = [mn, mx]
             else:
                 bins = 500
-                
+### using PyInstaller to build executable file
+    pip install pyinstaller
+    pyinstaller example.py
+    executable file will be at your_code_dir/dist/example
+    noModuleFound fix: open example.spec from the source code dir and change hiddenimports=[] to hiddenimports=["<missing_module_name>"] 
+    Note: In case of file missing error change the directory in the source code <Temporary Solution>
