@@ -1,5 +1,13 @@
 PyQt5==5.11.3
 pyqtgraph==0.10.0
 PyOpenGL==3.1.0
+MedPy==0.4.0
+h5py==2.9.0
 qtawesome
+opencv-python==4.0.0.21
+Keras==2.2.4
+Keras-Applications==1.0.7
+Keras-Preprocessing==1.0.9
+tensorboard==1.12.2
+tensorflow==1.12.0
 
