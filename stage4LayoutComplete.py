@@ -1,16 +1,9 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Feb 12 11:00:15 2019
-
-@author: swati
-"""
-
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *  #ref for icons :https://joekuan.wordpress.com/2015/09/23/list-of-qt-icons/
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QFile, QFileInfo, QSettings, Qt
 from PyQt5 import QtGui
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon ,QPixmap
 from PyQt5.QtWidgets import (QSpinBox, QSlider,QApplication, QMainWindow,QWidget, QAction, QMessageBox, QLabel, QRadioButton, 
     QFileDialog, QGridLayout, QPushButton, QMenu, QGroupBox, QVBoxLayout, QHBoxLayout, QScrollArea)
 import sys
@@ -22,12 +15,12 @@ from utilitiesBackend import *
 from medpy.io import load
 import numpy as np
 from time import sleep
-
         
         
 class Window(QMainWindow):
     EXIT_CODE_REBOOT = -123456789
     def __init__(self):
+        
         super().__init__()
         self.recentFileActs = []
         self.MaxRecentFiles = 5
@@ -45,7 +38,13 @@ class Window(QMainWindow):
 #                'seg_output': {'csf': None, 'gm': None, 'wm': None, 'tumor': None}
                 }
         self.setWindowIcon(QtGui.QIcon("images/saveSegmentedMRI.jpg"))
-        
+        self.setStyleSheet("""
+            color: white ; 
+            background-image: url(./Background/3.jpg);
+            background-attachment: scroll;
+            font-size: 15pt;
+
+        """);
         self.widget = Layout(parent=self)
         self.setCentralWidget(self.widget)
         
@@ -318,11 +317,31 @@ class Layout(QWidget):
         self.slider_value_changed()
         
     def createControlLayout(self):
+        
+      
         groupBox = QGroupBox("Controls")
         vBoxLayout = QVBoxLayout()
         hboxModality = QHBoxLayout()
+
+        #### below editing looks for entire control box        
+        groupBox.setStyleSheet("""
+            color: green; 
+            background-image: url(./Background/2.png);
+            background-attachment: scroll;
+            border: 2px solid black;
+            font-size: 10pt;
+
+        """);
+
         
         modalityLabel = QLabel("Choose Modality:")
+        #editing for modalitylabel
+        modalityLabel.setStyleSheet("""
+            color: red; 
+            font-size: 15pt;
+            font-family: Comic Sans MS;
+        """);
+        
         hboxModality.addWidget(modalityLabel)
         self.modalGroup = QButtonGroup()
         
@@ -365,8 +384,15 @@ class Layout(QWidget):
         slider_layout = QGridLayout()
         
         self.setSliceLabel = QLabel("Set Slice Number:")
-        slider_layout.addWidget(self.setSliceLabel, 0,0)
+        #editing for setSliceLabel
+        self.setSliceLabel.setStyleSheet("""
+            color: red; 
+            font-size: 15pt;
+            font-family: Comic Sans MS;
+        """);
         
+        slider_layout.addWidget(self.setSliceLabel, 0,0)
+
         slider_layout.addWidget(self.slider, 0,2,1,6)
         
         self.curLabel = QLabel("Current Slice : ")
@@ -375,6 +401,13 @@ class Layout(QWidget):
         
         self.dimGroup = QButtonGroup()
         dimLabel = QLabel("Choose Dimensionality:")
+        #editing for dimLabel
+        dimLabel.setStyleSheet("""
+            color: red; 
+            font-size: 15pt;
+            font-family: Comic Sans MS;
+        """);
+        
         slider_layout.addWidget(dimLabel, 2,0,1,2)
         self.dTransverse = QRadioButton("Transverse",self)
         self.dTransverse.clicked.connect(self.transverse_view)
