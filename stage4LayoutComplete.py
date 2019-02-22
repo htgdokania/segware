@@ -52,6 +52,7 @@ class Window(QMainWindow):
         self.createActions()
         self.createTools()
         self.createMenus()
+
         self.statusBar()
         self.setWindowTitle(self.title)
         self.setGeometry(self.top, self.left, self.width, self.height)
@@ -86,9 +87,17 @@ class Window(QMainWindow):
         self.openTool.setMovable(True)
         
     def createMenus(self):
-        
+
         self.mainMenu = self.menuBar()
         self.fileMenu = self.mainMenu.addMenu("File")     
+        self.mainMenu.setStyleSheet("""
+            color: white;
+            background-color: rgb(10, 10, 10);
+            font-size: 15pt;
+            font-family: Comic Sans MS;
+            border: 2px solid black;
+
+        """);
         self.fileMenu.addAction(self.viewAct)
         self.fileMenu.addAction(self.openLastAct)
         
@@ -322,7 +331,7 @@ class Layout(QWidget):
         groupBox = QGroupBox("Controls")
         vBoxLayout = QVBoxLayout()
         hboxModality = QHBoxLayout()
-
+        
         #### below editing looks for entire control box        
         groupBox.setStyleSheet("""
             color: green; 
@@ -480,6 +489,15 @@ class Layout(QWidget):
     
     def createMRIView(self, data):
         groupBox = QGroupBox("MRI View")
+        #### below editing looks for entire control box        
+        groupBox.setStyleSheet("""
+            color: blue; 
+            background-image: url(./Background/2.png);
+            background-attachment: scroll;
+            border: 2px solid black;
+            font-size: 10pt;
+
+        """); 
 #        print(data.shape)
         self.mriViewPlot = imagePlot(data = data)
         vBoxLayout = QVBoxLayout()
