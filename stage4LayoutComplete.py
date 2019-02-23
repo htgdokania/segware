@@ -40,7 +40,6 @@ class Window(QMainWindow):
         self.setWindowIcon(QtGui.QIcon("images/saveSegmentedMRI.jpg"))
         self.setStyleSheet("""
             color: white ; 
-            background-image: url(./Background/3.jpg);
             background-attachment: scroll;
             font-size: 15pt;
 
@@ -80,7 +79,13 @@ class Window(QMainWindow):
         self.tutorialAct = QAction(self.style().standardIcon(getattr(QStyle, 'SP_MessageBoxQuestion')), 'Tutorial', self, statusTip="Demo Tutorial", triggered=self.AboutSoftware)
 
     def createTools(self):
+
         self.openTool = self.addToolBar('View')
+        self.openTool.setStyleSheet("""
+            color: gray ; 
+            font-size: 15pt;
+
+        """);
         self.openTool.addAction(self.viewAct)
         self.openTool.addSeparator()
         self.openTool.addAction(self.segmentAct)
@@ -256,6 +261,15 @@ class Layout(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.grid = QGridLayout()
+        self.setStyleSheet("""
+            color: white ; 
+            background-attachment: scroll;
+            background-image: url(./Background/3.jpg);
+            font-size: 20pt;
+            border: 2px solid black;
+
+        """);
+
         self.mriViewPlot = None;
         self.maskViewPlot = None;
         self.segmentedViewPlot = None;
@@ -333,22 +347,24 @@ class Layout(QWidget):
         hboxModality = QHBoxLayout()
         
         #### below editing looks for entire control box        
+    
         groupBox.setStyleSheet("""
             color: green; 
             background-image: url(./Background/2.png);
             background-attachment: scroll;
             border: 2px solid black;
-            font-size: 10pt;
+            font-size: 12pt;
 
         """);
 
+##        groupBox.setStyleSheet("background-color: rgb{}; border:2px solid rgb(255, 170, 255);".format(QColor("darkgoldenrod").getRgb()[:3]))                                   
         
         modalityLabel = QLabel("Choose Modality:")
         #editing for modalitylabel
         modalityLabel.setStyleSheet("""
-            color: red; 
-            font-size: 15pt;
-            font-family: Comic Sans MS;
+            color: blue;
+            font-family: Comic Sans MS; 
+            font-size: 18pt;
         """);
         
         hboxModality.addWidget(modalityLabel)
@@ -395,8 +411,8 @@ class Layout(QWidget):
         self.setSliceLabel = QLabel("Set Slice Number:")
         #editing for setSliceLabel
         self.setSliceLabel.setStyleSheet("""
-            color: red; 
-            font-size: 15pt;
+            color: blue; 
+            font-size: 18pt;
             font-family: Comic Sans MS;
         """);
         
@@ -412,8 +428,8 @@ class Layout(QWidget):
         dimLabel = QLabel("Choose Dimensionality:")
         #editing for dimLabel
         dimLabel.setStyleSheet("""
-            color: red; 
-            font-size: 15pt;
+            color: blue;
+            font-size: 18pt;
             font-family: Comic Sans MS;
         """);
         
